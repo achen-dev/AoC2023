@@ -46,19 +46,48 @@ def day_one(input_file):
 def day_two(input_file):
     with open(input_file) as infile:
         lines_list = infile.read().splitlines()
-    print(lines_list)
 
     # Part 1
     RED_LIMIT = 12
     GREEN_LIMIT = 13
     BLUE_LIMIT = 14
 
+    total_id_sum = 0
+    total_power_sum = 0  # Part 2 sum
     for line in lines_list:
-        game_id = line.split(" ")[1][:-1]
-        print(game_id)
+        line_list = line.split(" ")
+        game_id = line_list[1][:-1]
+
+        max_red = 0
+        max_green = 0
+        max_blue = 0
+        for i in range(len(line_list)):
+            if "red" in line_list[i]:
+                if int(line_list[i-1]) > max_red:
+                    max_red = int(line_list[i-1])
+            elif "green" in line_list[i]:
+                if int(line_list[i-1]) > max_green:
+                    max_green = int(line_list[i-1])
+            elif "blue" in line_list[i]:
+                if int(line_list[i-1]) > max_blue:
+                    max_blue = int(line_list[i-1])
+        if max_red <= RED_LIMIT and max_green <= GREEN_LIMIT and max_blue <= BLUE_LIMIT:
+            total_id_sum += int(game_id)
+
+        # Part 2:
+        power = max_red * max_green * max_blue
+        total_power_sum += power
+
+    print("Part 1 Total Sum:", total_id_sum)
+    print("Part 2 Total Sum:", total_power_sum)
+
+
+def day_three(input_file):
+    return None
 
 
 if __name__ == '__main__':
-    # print("Day 1:")
-    # day_one('inputs/day1')
+    print("Day 1:")
+    day_one('inputs/day1')
+    print("Day 2:")
     day_two("inputs/day2")
