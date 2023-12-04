@@ -82,10 +82,6 @@ def day_two(input_file):
     print("Part 2 Total Sum:", total_power_sum)
 
 
-def day_three(input_file):
-    return None
-
-
 if __name__ == '__main__':
     print("Day 1:")
     day_one('inputs/day1')
